@@ -1,26 +1,53 @@
 package zli.ch.wake_shake;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+
+
+import java.time.LocalDateTime;
 
 import zli.ch.wake_shake.databinding.FragmentSecondBinding;
 
 public class Alarm extends Fragment {
 
     private FragmentSecondBinding binding;
+    private Shake shake;
+    private boolean isEdit = false;
+    private boolean vibrate = false;
+    private boolean deleteAfter = false;
+    private LocalDateTime time;
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
+            @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
+        Bundle args = getArguments();
+        if (args != null) {
+            String action = args.getString("action");
+            Log.e("args", action);
+            switch (action) {
+                case "edit":
+                    TextView alarmText = requireView().findViewById(R.id.alarmText);
+                    alarmText.setText("Alarm editieren");
+                    this.isEdit = true;
+                    break;
+                case "delete":
+                    break;
+            }
+        }
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
@@ -28,12 +55,24 @@ public class Alarm extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
+        binding.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(Alarm.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+            }
+        });
+
+        binding.deleteAfterSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                @SuppressLint("UseSwitchCompatOrMaterialCode") Switch deleteAfterSwitch = requireView().findViewById(R.id.deleteAfterSwitch);
+                deleteAfter = deleteAfterSwitch.isChecked();
+            }
+        });
+        binding.vibrationSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                @SuppressLint("UseSwitchCompatOrMaterialCode") Switch deleteAfterSwitch = requireView().findViewById(R.id.vibrationSwitch);
+                vibrate = deleteAfterSwitch.isChecked();
             }
         });
     }
@@ -43,5 +82,4 @@ public class Alarm extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
 }

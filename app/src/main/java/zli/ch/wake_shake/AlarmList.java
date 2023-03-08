@@ -43,6 +43,19 @@ public class AlarmList extends AppCompatActivity {
         }
         // alarms = new ArrayList<Alarm>();
 
+        setContentView(R.layout.fragment_first);
+
+        // get reference to ListView
+        ListView listView = findViewById(R.id.alarms);
+
+        // create adapter
+        ArrayAdapter<Alarm> adapter = new ArrayAdapter<Alarm>(this,
+                R.layout.alarm, // layout for each item
+                R.id.previewTime, // ID of TextView inside layout
+                alarms); // the data to populate the list
+
+        listView.setAdapter(adapter);
+
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

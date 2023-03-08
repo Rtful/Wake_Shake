@@ -1,25 +1,20 @@
 package zli.ch.wake_shake;
 
-import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Switch;
-import android.widget.TextView;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.annotation.Nullable;
 
 
 import java.time.LocalDateTime;
 
 import zli.ch.wake_shake.databinding.FragmentSecondBinding;
 
-public class Alarm extends Fragment {
+public class Alarm extends Activity implements Parcelable {
 
     private FragmentSecondBinding binding;
     private Shake shake;
@@ -28,58 +23,32 @@ public class Alarm extends Fragment {
     private boolean deleteAfter = false;
     private LocalDateTime time;
 
-    @SuppressLint("SetTextI18n")
-    @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-        Bundle args = getArguments();
-        if (args != null) {
-            String action = args.getString("action");
-            Log.e("args", action);
-            switch (action) {
-                case "edit":
-                    TextView alarmText = requireView().findViewById(R.id.alarmText);
-                    alarmText.setText("Alarm editieren");
-                    this.isEdit = true;
-                    break;
-                case "delete":
-                    break;
-            }
-        }
-        binding = FragmentSecondBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+    public Alarm() {
 
     }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        binding.saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Create a new intent to return the Alarm activity back to the AlarmList activity
+        Intent returnIntent = new Intent();
 
-        binding.deleteAfterSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                @SuppressLint("UseSwitchCompatOrMaterialCode") Switch deleteAfterSwitch = requireView().findViewById(R.id.deleteAfterSwitch);
-                deleteAfter = deleteAfterSwitch.isChecked();
-            }
-        });
-        binding.vibrationSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                @SuppressLint("UseSwitchCompatOrMaterialCode") Switch deleteAfterSwitch = requireView().findViewById(R.id.vibrationSwitch);
-                vibrate = deleteAfterSwitch.isChecked();
-            }
-        });
+        // Put the string extra into the return intent
+        String message = "Hello from Alarm activity!";
+        returnIntent.putExtra("message", message);
+
+        // Set the result to be returned to the AlarmList activity and finish this activity
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+
     }
 }

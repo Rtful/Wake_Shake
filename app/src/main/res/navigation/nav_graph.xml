@@ -3,26 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/AlarmList">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/AlarmList"
         android:name="zli.ch.wake_shake.AlarmList"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_AlarmList_to_Alarm"
+            app:destination="@id/Alarm" />
     </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
+
+    <activity
+        android:id="@+id/Alarm"
         android:name="zli.ch.wake_shake.Alarm"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+            android:id="@+id/action_Alarm_to_AlarmList"
+            app:destination="@id/AlarmList" />
+    </activity>
 </navigation>

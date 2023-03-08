@@ -22,6 +22,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Alarm"
+            android:exported="true"
+            android:theme="@style/Theme.Wake_Shake.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.Alarm" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AlarmList"
+            android:exported="true"
+            android:theme="@style/Theme.Wake_Shake.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.AlarmList" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

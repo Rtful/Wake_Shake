@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import zli.ch.wake_shake.databinding.FragmentFirstBinding;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -41,7 +42,9 @@ public class AlarmList extends AppCompatActivity {
             alarms = gson.fromJson(alarmsJSON, new TypeToken<ArrayList<Alarm>>() {
             }.getType());
         }
-        // alarms = new ArrayList<Alarm>();
+
+        binding = FragmentFirstBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         setContentView(R.layout.fragment_first);
 

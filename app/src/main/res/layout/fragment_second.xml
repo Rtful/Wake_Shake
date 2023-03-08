@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
+                    android:text="06:35"
                     android:textAlignment="viewEnd" />
             </LinearLayout>
 
@@ -85,6 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:checked="false"
                     android:text="Löschen nach Ausführung" />
 
             </LinearLayout>
@@ -99,6 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:checked="true"
                     android:text="Vibration" />
 
             </LinearLayout>
@@ -113,14 +115,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="Wiederholen" />
 
                 <TextView
                     android:id="@+id/repeat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
+                    android:text="-"
                     android:textAlignment="viewEnd" />
             </LinearLayout>
 

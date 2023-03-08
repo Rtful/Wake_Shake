@@ -27,11 +27,29 @@ public class Alarm extends Activity implements Parcelable {
 
     }
 
+    protected Alarm(Parcel in) {
+        isEdit = in.readByte() != 0;
+        vibrate = in.readByte() != 0;
+        deleteAfter = in.readByte() != 0;
+    }
+
+    public static final Creator<Alarm> CREATOR = new Creator<Alarm>() {
+        @Override
+        public Alarm createFromParcel(Parcel in) {
+            return new Alarm(in);
+        }
+
+        @Override
+        public Alarm[] newArray(int size) {
+            return new Alarm[size];
+        }
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create a new intent to return the Alarm activity back to the AlarmList activity
-        Intent returnIntent = new Intent();
+        Intent returnIntent = new Intent(this, AlarmList.class);
 
         // Put the string extra into the return intent
         String message = "Hello from Alarm activity!";
@@ -49,6 +67,8 @@ public class Alarm extends Activity implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
-
+        parcel.writeByte((byte) (isEdit ? 1 : 0));
+        parcel.writeByte((byte) (vibrate ? 1 : 0));
+        parcel.writeByte((byte) (deleteAfter ? 1 : 0));
     }
 }

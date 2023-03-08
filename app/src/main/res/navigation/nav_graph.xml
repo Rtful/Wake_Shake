@@ -5,25 +5,17 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/AlarmList">
 
-    <fragment
+    <activity
         android:id="@+id/AlarmList"
         android:name="zli.ch.wake_shake.AlarmList"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
-
-        <action
-            android:id="@+id/action_AlarmList_to_Alarm"
-            app:destination="@id/Alarm" />
-    </fragment>
+    </activity>
 
     <activity
         android:id="@+id/Alarm"
         android:name="zli.ch.wake_shake.Alarm"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_Alarm_to_AlarmList"
-            app:destination="@id/AlarmList" />
     </activity>
 </navigation>
